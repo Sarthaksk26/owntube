@@ -295,7 +295,7 @@ const updateAccountDetails = asyncHandler(async(req, res) =>{
 
 const updateUserAvatar = asyncHandler(async(req, res)=>{
     const avatarLocalPath = req.file?._path //got this through multer middleware
-
+    //delete old avatar image 
     if(!avatarLocalPath){
         throw new ApiError(400, "Avatar file is missing")
     }
