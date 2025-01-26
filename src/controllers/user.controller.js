@@ -425,10 +425,19 @@ const getUserChannelProfile = asyncHandler(async (req, res)=>{
 })
 
 const getWatchHistory =asyncHandler(async (req, res) =>{
+    /*let userId;
+
+    if (req.user._id === "string") {
+      userId = new mongoose.Types.ObjectId(req.user._id);
+    } else if (req.user._id instanceof mongoose.Types.ObjectId) {
+      userId = req.user._id;
+    } else if (typeof req.user._id === "number") {
+      userId = new mongoose.Types.ObjectId(req.user._id.toString());
+    }*/
     const user = await User.aggregate([
         {
             $match:{
-                _id: new mongoose.Types.ObjectId(req.user._id)
+                _id: mongoose.Types.ObjectId.createFromHexString(req.user._id)
             }
         },
         {
